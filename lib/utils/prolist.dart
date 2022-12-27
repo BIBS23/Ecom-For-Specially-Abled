@@ -13,7 +13,7 @@ class ProList {
     required this.details,
   });
 
-  static List Details = [
+  static List prodetails = [
     ProList(
         proname: "Foldable Wheel Chair",
         proimg: "assets/wheelchair.jpg",

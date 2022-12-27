@@ -12,7 +12,7 @@ class _CartIconState extends State<CartIcon> {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      Icon(Icons.shopping_cart),
+      const Icon(Icons.shopping_cart),
       Badge(
         showBadge: true,
       )

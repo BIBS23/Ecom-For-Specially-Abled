@@ -1,49 +1,45 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snapbut/Providers/cartprovider.dart';
-import 'package:snapbut/utils/prolist.dart';
 
-List Cartitem = [];
-List Cartitemname = [];
-List Cartitemprice = [];
+
+List cartitem = [];
+List cartitemname = [];
+List cartitemprice = [];
 
 class Cart extends StatefulWidget {
-  Cart({
+  const Cart({
     super.key,
   });
 
   @override
   State<Cart> createState() => _CartState();
 }
-
 class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     final badge = Provider.of<CartProvider>(context);
-    final count = badge.count;
-    final totalamount = Provider.of<CartProvider>(context);
-    final amount = totalamount.count;
+  
     return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             "Cart",
             style: TextStyle(letterSpacing: 10),
           ),
           centerTitle: true,
         ),
         body: ListView.builder(
-            itemCount: Cartitem.length,
+            itemCount: cartitem.length,
             itemBuilder: (context, index) {
               return Padding(
                   padding: const EdgeInsets.only(right: 20, top: 10),
-                  child: Container(
+                  child: SizedBox(
                     height: 150,
                     child: Row(children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
-                          Cartitem[index],
+                          cartitem[index],
                         ),
                       ),
                       Expanded(
@@ -53,36 +49,39 @@ class _CartState extends State<Cart> {
                             Padding(
                               padding: const EdgeInsets.only(left: 20),
                               child: Text(
-                                Cartitemname[index],
+                                cartitemname[index],
                                 overflow: TextOverflow.clip,
                                 maxLines: 3,
                                 style: TextStyle(fontSize: 17),
                               ),
                             ),
                             Text(
-                              Cartitemprice[index],
+                              cartitemprice[index],
                               style: TextStyle(fontSize: 20, letterSpacing: 5),
                             ),
                             SizedBox(
                               width: 150,
                               child: TextButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStatePropertyAll(
-                                          Colors.grey.withOpacity(0.5))),
+
+                                style: ButtonStyle(
+                                backgroundColor: MaterialStatePropertyAll(
+                                Colors.grey.withOpacity(0.5))),
                                   onPressed: () {
                                     setState(() {
                                       badge.cartSizedecr();
-                                      Cartitemname.removeAt(index);
-                                      Cartitem.removeAt(index);
-                                      Cartitemprice.removeAt(index);
-                                      print("tapped");
+                                      cartitemname.removeAt(index);
+                                      cartitem.removeAt(index);
+                                      cartitemprice.removeAt(index);
                                     });
                                   },
                                   child: Text(
-                                    "Remove",
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6)),
-                                  )),
+
+                                  "Remove",
+                                  style: TextStyle(
+                                  color: Colors.black.withOpacity(0.6)),
+                                )
+                              ),
+                                
                             ),
                           ],
                         ),
@@ -91,16 +90,16 @@ class _CartState extends State<Cart> {
                   ));
             }),
         bottomNavigationBar: Row(children: [
-          Container(
+          const SizedBox(
               height: 60,
               width: 180,
               child: Center(
                 child: Text(
                   'Clear Cart',
                   style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 20),
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20),
                 ),
               )),
           SizedBox(
@@ -108,17 +107,19 @@ class _CartState extends State<Cart> {
             width: 180,
             child: TextButton(
               onPressed: () {},
-              child: Text(
+              style: const ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(Colors.orange)),
+              child: const  Text(
                 "Place Order",
                 style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20),
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+                fontSize: 20),
               ),
-              style: ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.orange)),
             ),
           ),
-        ]));
+        ]
+      )
+    );
   }
 }
